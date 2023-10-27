@@ -7,14 +7,14 @@ using UnityEngine.SceneManagement;
 public class UI : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject MainMenu, PauseMenu, GameOver;
+    public GameObject PauseMenu;
 
     public int newSceneIndex;
 
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.None;
     }
     public PlayerController PlayerScript;
@@ -80,6 +80,6 @@ public class UI : MonoBehaviour
 
     public void LoadGameOver()
     {
-        SceneManager.LoadSceneAsync("GameOver");
+        SceneManager.LoadSceneAsync(5);
     }
 }

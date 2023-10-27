@@ -28,6 +28,12 @@ public class PlayerController : MonoBehaviour
 
     public bool IsGrounded, jump;
 
+    public UI UIScript;
+
+    public GameObject SpawnPoint;
+
+    public Transform SpawnPos;
+
     //
 
     // Start is called before the first frame update
@@ -88,9 +94,39 @@ public class PlayerController : MonoBehaviour
 
             jump = false;
         }
+        SpawnPos = SpawnPoint.transform;
+        if (Lives <= 0)
+        {
+            UIScript.LoadGameOver();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // If you hit anything tagged enemy or spike (enemy to be changed to depend on attack state), including the endless pit.
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Spike")
+        {
+            LoseALife();
+            if (Lives > 0)
+            {
+                respawn();
+            }
+        }
     }
 
 
+    public void LoseALife()
+    {
+        if (Lives >= 0)
+        {
+            Lives--;
+        }
+    }
+
+    public void respawn()
+    {
+        transform.position = SpawnPos.transform.position;
+    }
 
 }
 
