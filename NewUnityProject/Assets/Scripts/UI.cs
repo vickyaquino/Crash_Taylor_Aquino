@@ -9,6 +9,8 @@ public class UI : MonoBehaviour
     // Start is called before the first frame update
     public GameObject MainMenu, PauseMenu, GameOver;
 
+    public int newSceneIndex;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +26,8 @@ public class UI : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         IsPaused = false;
-        //come back to put in sceneloader 'loadscene' as a function
+        newSceneIndex = 1;
+        LoadNextLevel();
     }
 
     public void Pause()
@@ -63,10 +66,20 @@ public class UI : MonoBehaviour
     {
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
-        GameOver.SetActive(true);
+        //come back to put in sceneloader 'loadscene' as a function
     }
     public void PlayGame()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadSceneAsync(newSceneIndex);
+    }
+
+    public void LoadGameOver()
+    {
+        SceneManager.LoadSceneAsync("GameOver");
     }
 }

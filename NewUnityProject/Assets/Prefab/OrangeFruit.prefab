@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8521145010381745349}
   - component: {fileID: 3368515021395104914}
   m_Layer: 0
-  m_Name: Orange
+  m_Name: OrangeFruit
   m_TagString: Fruit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

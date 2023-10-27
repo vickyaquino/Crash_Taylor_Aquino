@@ -26,10 +26,14 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rigidBody;
 
+    public bool IsGrounded, jump;
+
+    //
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        rigidBody = this.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -40,19 +44,53 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log("Move the player left");
             //translate the player by speed using Time.deltaTime
-            transform.position += Vector3.left * speed * Time.deltaTime;
+            transform.position += -transform.right * speed * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position += Vector3.right * speed * Time.deltaTime;
+            transform.position += transform.right * speed * Time.deltaTime;
         }
         //Debugs out and shows what the raycast looks like in the editor
         Debug.DrawLine(transform.position, transform.position + Vector3.down * 1.5f, Color.red);
 
-        
-        //Pending to code in jump which is SPACE bar and Forward= W, and backward= S
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        {
+            transform.position += transform.forward * speed * Time.deltaTime;
+        }
+
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            transform.position += -transform.forward * speed * Time.deltaTime;
+        }
+
+        if (Physics.Raycast(transform.position, Vector3.down, 1.1f))
+        {
+            IsGrounded = true;
+        }
+        else
+        {
+            IsGrounded = false;
+        }
+
+        if (Input.GetKey(KeyCode.Space) && IsGrounded)
+        {
+            jump = true;
+        }
     }
+
+
+    private void FixedUpdate()
+    {
+        if (jump)
+        {
+            rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+            jump = false;
+        }
+    }
+
+
 
 }
 
