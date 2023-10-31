@@ -55,14 +55,14 @@ public class UI : MonoBehaviour
         {
             Resume();
         }
-        if (PlayerScript.Lives <= 0) gameOver();
+        if (PlayerScript.Lives <= 0) GameOver();
     }
     public void QuitGame()
     {
         Application.Quit();
     }
 
-    public void gameOver()
+    public void GameOver()
     {
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;

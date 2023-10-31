@@ -85,8 +85,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Vicky Come back to this is giving error..
+    /// </summary>
+    /// <param name="other"></param>
+    //set the fruits ui to fruitsCollected
+    //FruitCounter.text = "fruits Collected: " + fruitsCollected;
+    //private void OnTriggerEnter(Collider other)
+    //{
+        //if we collide w a fruit trigger, delete it and add to score
+        //if (other.gameObject.tag == "fruit")
+        //{
+            //fruitsCollected++;
+            //other.gameObject.SetActive(false);
+        //}
+    //}
 
-    private void FixedUpdate()
+        private void FixedUpdate()
     {
         if (jump)
         {
@@ -109,7 +124,7 @@ public class PlayerController : MonoBehaviour
             LoseALife();
             if (Lives > 0)
             {
-                respawn();
+                Respawn();
             }
         }
     }
@@ -123,10 +138,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void respawn()
+    public void Respawn()
     {
         transform.position = SpawnPos.transform.position;
     }
+    
+    //teleport the player to the spawn point to the level that they should be in
+    //public void spawn()
+    //{
+       // transform.position = spawnPoints[currentLevel];
+   // }
+
 
 }
 
