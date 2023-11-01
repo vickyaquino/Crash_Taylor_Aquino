@@ -66,7 +66,7 @@ public class UI : MonoBehaviour
     {
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
-        //come back to put in sceneloader 'loadscene' as a function
+        SceneManager.LoadScene(2);
     }
     public void PlayGame()
     {

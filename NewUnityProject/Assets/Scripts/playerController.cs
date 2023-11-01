@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     //amount of lives main player has in the beginning of the game.
     public int Lives = 3;
 
+    public int currentLevel, totalLevels;
+    public GameObject[] spawnPoints = new GameObject[4];
+
     //side to side movement speed
     public float speed = 10f;
 
@@ -33,6 +36,8 @@ public class PlayerController : MonoBehaviour
     public GameObject SpawnPoint;
 
     public Transform SpawnPos;
+
+    public Material Gold, Red;
 
     //
 
@@ -127,7 +132,7 @@ public class PlayerController : MonoBehaviour
                 Respawn();
             }
         }
-
+        // Portal, teleports player to next level
         if (other.gameObject.tag == "Portal")
         {
 
