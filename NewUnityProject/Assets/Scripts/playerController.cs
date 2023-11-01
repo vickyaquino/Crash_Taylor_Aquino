@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 /*
  *  Author: [Aquino, Vicky and Maddi Taylor]
@@ -136,6 +137,12 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Portal")
         {
 
+        }
+        // Fruit Grabber
+        if (other.gameObject.tag == "Fruit")
+        {
+            other.gameObject.SetActive(false);
+            fruitsCollected++;
         }
     }
 
