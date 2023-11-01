@@ -127,6 +127,11 @@ public class PlayerController : MonoBehaviour
                 Respawn();
             }
         }
+
+        if (other.gameObject.tag == "Portal")
+        {
+
+        }
     }
 
 
