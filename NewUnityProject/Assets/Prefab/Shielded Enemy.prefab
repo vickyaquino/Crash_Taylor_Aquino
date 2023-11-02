@@ -657,7 +657,7 @@ Transform:
   m_GameObject: {fileID: 5804392452245323607}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.79}
+  m_LocalPosition: {x: 0.01, y: 0, z: 1.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -688,7 +688,7 @@ Transform:
   m_GameObject: {fileID: 5866282121697935279}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -1.71}
+  m_LocalPosition: {x: -0.11, y: 0, z: -3.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1130,6 +1130,7 @@ GameObject:
   - component: {fileID: 290440350144999559}
   - component: {fileID: 1361258220695633580}
   - component: {fileID: 655490692211346685}
+  - component: {fileID: 2685950796953423907}
   m_Layer: 0
   m_Name: Shielded Enemy
   m_TagString: Enemy
@@ -1265,6 +1266,22 @@ CapsuleCollider:
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &655490692211346685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7849324390755570805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 999badfb26bfe1440b2e41076b08b696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  movingLeft: 0
+  leftLimit: {fileID: 5804392452245323607}
+  rightLimit: {fileID: 5866282121697935279}
+--- !u!114 &2685950796953423907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
