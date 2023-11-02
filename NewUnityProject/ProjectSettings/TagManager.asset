@@ -9,7 +9,7 @@ TagManager:
   - Shielded Enemy
   - Spike
   - Fruit
-  - Portal
+  - platform
   layers:
   - Default
   - TransparentFX
