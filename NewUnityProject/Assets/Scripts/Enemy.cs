@@ -5,7 +5,7 @@ using UnityEngine;
 /*
  *  Author: [Aquino, Vicky]
  *  Date: [10/31/2023]
- *  [Make enemy move]
+ *  [Make all the enemies move]
  */
 public class Enemy : MonoBehaviour
 {
