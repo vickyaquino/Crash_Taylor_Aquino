@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 /*
  *  Author: [Aquino, Vicky and Maddi Taylor]
@@ -18,6 +19,9 @@ public class PlayerController : MonoBehaviour
     //amount of lives main player has in the beginning of the game.
     public int Lives = 3;
 
+    public int currentLevel, totalLevels;
+    public GameObject[] spawnPoints = new GameObject[4];
+
     //side to side movement speed
     public float speed = 10f;
 
@@ -28,11 +32,13 @@ public class PlayerController : MonoBehaviour
 
     public bool IsGrounded, jump;
 
-    public UI UIScript;
-
     public GameObject SpawnPoint;
 
     public Transform SpawnPos;
+
+    public Material Gold, Red;
+
+    public TextMeshProUGUI FruitsCollected, LivesRemaining;
 
     //
 
@@ -83,10 +89,27 @@ public class PlayerController : MonoBehaviour
         {
             jump = true;
         }
+        LivesRemaining.text = "Lives Remaining: " + Lives;
+        FruitsCollected.text = "Fruits Collected: " + fruitsCollected;
     }
 
+    /// <summary>
+    /// Vicky Come back to this is giving error..
+    /// </summary>
+    /// <param name="other"></param>
+    //set the fruits ui to fruitsCollected
+    //FruitCounter.text = "fruits Collected: " + fruitsCollected;
+    //private void OnTriggerEnter(Collider other)
+    //{
+        //if we collide w a fruit trigger, delete it and add to score
+        //if (other.gameObject.tag == "fruit")
+        //{
+            //fruitsCollected++;
+            //other.gameObject.SetActive(false);
+        //}
+    //}
 
-    private void FixedUpdate()
+        private void FixedUpdate()
     {
         if (jump)
         {
@@ -97,7 +120,7 @@ public class PlayerController : MonoBehaviour
         SpawnPos = SpawnPoint.transform;
         if (Lives <= 0)
         {
-            UIScript.LoadGameOver();
+            SceneManager.LoadScene(2);
         }
     }
 
@@ -109,8 +132,21 @@ public class PlayerController : MonoBehaviour
             LoseALife();
             if (Lives > 0)
             {
-                respawn();
+                Respawn();
             }
+        }
+        // Portal, teleports player to next level
+        if (other.gameObject.tag == "Portal")
+        {
+            // TELEPORT TO NEXT SPAWN POINT
+            // SET NEXT SPAWN POINT TO MAIN SPAWN POINT
+            // ADD ONE TO INDEX
+        }
+        // Fruit Grabber
+        if (other.gameObject.tag == "Fruit")
+        {
+            other.gameObject.SetActive(false);
+            fruitsCollected++;
         }
     }
 
@@ -123,10 +159,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void respawn()
+    public void Respawn()
     {
         transform.position = SpawnPos.transform.position;
     }
+    
+    //teleport the player to the spawn point to the level that they should be in
+    //public void spawn()
+    //{
+       // transform.position = spawnPoints[currentLevel];
+   // }
+
 
 }
 
