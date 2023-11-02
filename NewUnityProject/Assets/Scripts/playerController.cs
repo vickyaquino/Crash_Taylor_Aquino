@@ -138,7 +138,9 @@ public class PlayerController : MonoBehaviour
         // Portal, teleports player to next level
         if (other.gameObject.tag == "Portal")
         {
-
+            // TELEPORT TO NEXT SPAWN POINT
+            // SET NEXT SPAWN POINT TO MAIN SPAWN POINT
+            // ADD ONE TO INDEX
         }
         // Fruit Grabber
         if (other.gameObject.tag == "Fruit")

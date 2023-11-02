@@ -315,8 +315,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   movingLeft: 0
-  leftLimit: {fileID: 0}
-  rightLimit: {fileID: 0}
+  leftLimit: {fileID: 384099187138086758}
+  rightLimit: {fileID: 3837573737323219048}
 --- !u!1 &7638766322996609685
 GameObject:
   m_ObjectHideFlags: 0
