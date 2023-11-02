@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5618026303905308539, guid: 765676e3660dfc24db3ed33940af04d9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6561025164532313290, guid: 765676e3660dfc24db3ed33940af04d9, type: 3}
       propertyPath: m_Name
       value: Portal (1)
@@ -12494,6 +12498,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5618026303905308539, guid: 765676e3660dfc24db3ed33940af04d9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6561025164532313290, guid: 765676e3660dfc24db3ed33940af04d9, type: 3}
       propertyPath: m_Name
       value: Portal
