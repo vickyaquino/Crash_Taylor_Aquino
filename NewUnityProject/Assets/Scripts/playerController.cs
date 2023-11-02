@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.SceneManagement;
 
 /*
  *  Author: [Aquino, Vicky and Maddi Taylor]
@@ -32,13 +32,13 @@ public class PlayerController : MonoBehaviour
 
     public bool IsGrounded, jump;
 
-    public UI UIScript;
-
     public GameObject SpawnPoint;
 
     public Transform SpawnPos;
 
     public Material Gold, Red;
+
+    public TextMeshProUGUI FruitsCollected, LivesRemaining;
 
     //
 
@@ -89,6 +89,8 @@ public class PlayerController : MonoBehaviour
         {
             jump = true;
         }
+        LivesRemaining.text = "Lives Remaining: " + Lives;
+        FruitsCollected.text = "Fruits Collected: " + fruitsCollected;
     }
 
     /// <summary>
@@ -118,7 +120,7 @@ public class PlayerController : MonoBehaviour
         SpawnPos = SpawnPoint.transform;
         if (Lives <= 0)
         {
-            UIScript.LoadGameOver();
+            SceneManager.LoadScene(2);
         }
     }
 
