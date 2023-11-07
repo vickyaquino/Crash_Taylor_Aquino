@@ -32,13 +32,13 @@ public class PlayerController : MonoBehaviour
 
     public bool IsGrounded, jump;
 
-    public GameObject SpawnPoint;
-
     public Transform SpawnPos;
 
     public Material Gold, Red;
 
     public TextMeshProUGUI FruitsCollected, LivesRemaining;
+
+    bool canAttack;
 
     //
 
@@ -46,6 +46,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigidBody = this.GetComponent<Rigidbody>();
+        currentLevel = 0;
+        totalLevels = spawnPoints.Length;
+        canAttack = true;
     }
 
     // Update is called once per frame
@@ -89,8 +92,13 @@ public class PlayerController : MonoBehaviour
         {
             jump = true;
         }
+        if (Input.GetKey(KeyCode.E) && canAttack)
+        {
+            StartCoroutine(AttackMode());
+        }
         LivesRemaining.text = "Lives Remaining: " + Lives;
         FruitsCollected.text = "Fruits Collected: " + fruitsCollected;
+        SpawnPos = spawnPoints[currentLevel].transform;
     }
 
     /// <summary>
@@ -117,7 +125,6 @@ public class PlayerController : MonoBehaviour
 
             jump = false;
         }
-        SpawnPos = SpawnPoint.transform;
         if (Lives <= 0)
         {
             SceneManager.LoadScene(2);
@@ -127,7 +134,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // If you hit anything tagged enemy or spike (enemy to be changed to depend on attack state), including the endless pit.
-        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Spike")
+        if (other.gameObject.tag == "Spike")
         {
             LoseALife();
             if (Lives > 0)
@@ -135,12 +142,30 @@ public class PlayerController : MonoBehaviour
                 Respawn();
             }
         }
+        if (other.gameObject.tag == "Enemy" && canAttack)
+        {
+            LoseALife();
+            if (Lives > 0)
+            {
+                Respawn();
+            }
+        }
+        else
+        {
+            if (other.gameObject.tag == "Enemy" && !canAttack)
+            {
+                other.gameObject.SetActive(false);
+            }
+        }
         // Portal, teleports player to next level
         if (other.gameObject.tag == "Portal")
         {
-            // TELEPORT TO NEXT SPAWN POINT
-            // SET NEXT SPAWN POINT TO MAIN SPAWN POINT
-            // ADD ONE TO INDEX
+            if (currentLevel < totalLevels)
+            {
+                currentLevel++;
+            }
+            SpawnPos.transform.position = spawnPoints[currentLevel].transform.position;
+            Respawn();
         }
         // Fruit Grabber
         if (other.gameObject.tag == "Fruit")
@@ -169,6 +194,17 @@ public class PlayerController : MonoBehaviour
     //{
        // transform.position = spawnPoints[currentLevel];
    // }
+
+
+    public IEnumerator AttackMode()
+    {
+        canAttack = false;
+        GetComponent<MeshRenderer>().material = Red;
+        yield return new WaitForSeconds(1f);
+        GetComponent<MeshRenderer>().material = Gold;
+        yield return new WaitForSeconds(.5f);
+        canAttack = true;
+    }
 
 
 }
