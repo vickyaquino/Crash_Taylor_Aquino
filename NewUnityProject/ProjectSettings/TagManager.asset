@@ -10,6 +10,11 @@ TagManager:
   - Spike
   - Fruit
   - platform
+  - Portal
+  - Chest
+  - Secret
+  - End
+  - Entrance
   layers:
   - Default
   - TransparentFX

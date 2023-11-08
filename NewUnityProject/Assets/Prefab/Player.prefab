@@ -232,10 +232,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruitsCollected: 0
   Lives: 3
+  currentLevel: 0
+  totalLevels: 0
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   speed: 10
   jumpForce: 5
   IsGrounded: 0
   jump: 0
+  SpawnPos: {fileID: 0}
+  Gold: {fileID: 0}
+  Red: {fileID: 0}
+  FruitsCollected: {fileID: 0}
+  LivesRemaining: {fileID: 0}
 --- !u!54 &2005049369861583412
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -395,13 +407,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5840459416894953089}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0059970934, y: -0, z: -0, w: 0.99998206}
-  m_LocalPosition: {x: 1.09, y: 1.36, z: -1.13}
+  m_LocalRotation: {x: 0.029712433, y: -0.000035867095, z: 0.0059833983, w: 0.99954057}
+  m_LocalPosition: {x: 1.295, y: 1.36, z: -2.359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7751190332727058625}
-  m_LocalEulerAnglesHint: {x: -0.687, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 3.405, y: 0.016, z: 0.686}
 --- !u!20 &7708728004088601414
 Camera:
   m_ObjectHideFlags: 0

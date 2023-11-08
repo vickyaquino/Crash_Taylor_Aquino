@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     public int currentLevel, totalLevels;
     public GameObject[] spawnPoints = new GameObject[4];
 
+    public Transform SecretSpawnPos;
+
     //side to side movement speed
     public float speed = 10f;
 
@@ -38,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     public TextMeshProUGUI FruitsCollected, LivesRemaining;
 
-    bool canAttack;
+    bool canAttack, isAttacking;
 
     //
 
@@ -49,6 +51,7 @@ public class PlayerController : MonoBehaviour
         currentLevel = 0;
         totalLevels = spawnPoints.Length;
         canAttack = true;
+        isAttacking = false;
     }
 
     // Update is called once per frame
@@ -96,6 +99,10 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(AttackMode());
         }
+        if (fruitsCollected >= 100)
+        {
+            gainALife();
+        }
         LivesRemaining.text = "Lives Remaining: " + Lives;
         FruitsCollected.text = "Fruits Collected: " + fruitsCollected;
         SpawnPos = spawnPoints[currentLevel].transform;
@@ -142,7 +149,7 @@ public class PlayerController : MonoBehaviour
                 Respawn();
             }
         }
-        if (other.gameObject.tag == "Enemy" && canAttack)
+        if (other.gameObject.tag == "Enemy" && !isAttacking)
         {
             LoseALife();
             if (Lives > 0)
@@ -152,7 +159,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (other.gameObject.tag == "Enemy" && !canAttack)
+            if (other.gameObject.tag == "Enemy" && isAttacking)
             {
                 other.gameObject.SetActive(false);
             }
@@ -164,14 +171,46 @@ public class PlayerController : MonoBehaviour
             {
                 currentLevel++;
             }
+            else if (currentLevel >= totalLevels)
+            {
+                currentLevel = totalLevels - 1;
+            }
             SpawnPos.transform.position = spawnPoints[currentLevel].transform.position;
             Respawn();
         }
+        // go back a level
+        if (other.gameObject.tag == "Entrance")
+        {
+            if (currentLevel > 0)
+            {
+                currentLevel--;
+            }
+            else if (currentLevel <= 0)
+            {
+                currentLevel = 1;
+            }
+            SpawnPos.transform.position = spawnPoints[currentLevel].transform.position;
+            Respawn();
+        }
+        //End portal
+        if (other.gameObject.tag == "End")
+        {
+            SceneManager.LoadScene(3);
+        }
+
         // Fruit Grabber
         if (other.gameObject.tag == "Fruit")
         {
             other.gameObject.SetActive(false);
             fruitsCollected++;
+        }
+        if (other.gameObject.tag == "Chest" && isAttacking)
+        {
+            other.GetComponent<chest>().BreakChest();
+        }
+        if (other.gameObject.tag == "Secret")
+        {
+            transform.position = SecretSpawnPos.position;
         }
     }
 
@@ -195,17 +234,23 @@ public class PlayerController : MonoBehaviour
        // transform.position = spawnPoints[currentLevel];
    // }
 
+    public void gainALife()
+    {
+        Lives++;
+        fruitsCollected -= 100;
+    }
+
 
     public IEnumerator AttackMode()
     {
         canAttack = false;
+        isAttacking = true;
         GetComponent<MeshRenderer>().material = Red;
         yield return new WaitForSeconds(1f);
+        isAttacking = false;
         GetComponent<MeshRenderer>().material = Gold;
         yield return new WaitForSeconds(.5f);
         canAttack = true;
     }
-
-
 }
 
