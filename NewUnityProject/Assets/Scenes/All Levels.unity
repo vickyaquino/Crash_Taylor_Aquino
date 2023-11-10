@@ -7943,7 +7943,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7310320864770721178, guid: 38fe7e76d0229b246b53082a58b694ac, type: 3}
       propertyPath: m_Name
-      value: SpawnPoint
+      value: SpawnPoint4
       objectReference: {fileID: 0}
     - target: {fileID: 8322539673037907587, guid: 38fe7e76d0229b246b53082a58b694ac, type: 3}
       propertyPath: m_LocalScale.x
