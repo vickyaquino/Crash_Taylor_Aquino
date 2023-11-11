@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     public TextMeshProUGUI FruitsCollected, LivesRemaining;
 
-    bool canAttack, isAttacking;
+    bool canAttack, isAttacking, SeenSecret;
 
     //
 
@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
         totalLevels = spawnPoints.Length;
         canAttack = true;
         isAttacking = false;
+        SeenSecret = false;
     }
 
     // Update is called once per frame
@@ -181,11 +182,11 @@ public class PlayerController : MonoBehaviour
         // go back a level
         if (other.gameObject.tag == "Entrance")
         {
-            if (currentLevel > 0)
+            if (currentLevel >= 0)
             {
                 currentLevel--;
             }
-            else if (currentLevel <= 0)
+            else if (currentLevel < 0)
             {
                 currentLevel = 1;
             }
@@ -208,9 +209,16 @@ public class PlayerController : MonoBehaviour
         {
             other.GetComponent<chest>().BreakChest();
         }
-        if (other.gameObject.tag == "Secret")
+        if (other.gameObject.tag == "Secret" && !SeenSecret)
         {
+            SeenSecret = true;
             transform.position = SecretSpawnPos.position;
+        }
+        if (other.gameObject.tag == "SecretEnd")
+        {
+            SpawnPos.transform.position = spawnPoints[currentLevel-1].transform.position;
+            Respawn();
+            SpawnPos.transform.position = spawnPoints[currentLevel].transform.position;
         }
     }
 

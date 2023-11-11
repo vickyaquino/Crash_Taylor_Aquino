@@ -15,6 +15,7 @@ TagManager:
   - Secret
   - End
   - Entrance
+  - SecretEnd
   layers:
   - Default
   - TransparentFX
