@@ -1,1 +1,0 @@
-This is a .zip file because we're dealing with multiple scenes and going from one scene to another for the menus. (This is making it easier to reset the game when/if a player wants to restart).
